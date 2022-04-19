@@ -33,5 +33,5 @@ su - zimbra -c 'zmcontrol start'
 a=`grep "/usr/bin/certbot" /var/spool/cron/root`
 if [[ -z "$a" ]]
 then
-        echo "0 0 * * * root /usr/bin/certbot renew --pre-hook "/usr/local/bin/certbot_zimbra.sh -p" --deploy-hook "/usr/local/bin/certbot_zimbra.sh -d"" >> /var/spool/cron/root
+        echo "0 0 * * * root /usr/bin/certbot renew --pre-hook \"/usr/local/bin/certbot_zimbra.sh -p\" --deploy-hook \"/usr/local/bin/certbot_zimbra.sh -d\"" >> /var/spool/cron/root
 fi

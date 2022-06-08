@@ -25,6 +25,7 @@ then
         cd certbot-zimbra-0.7.11 && cp certbot_zimbra.sh /usr/local/bin/
         /usr/local/bin/certbot_zimbra.sh -d
 else
+        cd certbot-zimbra-0.7.11 && cp certbot_zimbra.sh /usr/local/bin/
         /usr/local/bin/certbot_zimbra.sh -d
 fi
 su - zimbra -c 'zmcontrol start'

@@ -27,7 +27,7 @@ then
 else
         /usr/local/bin/certbot_zimbra.sh -d
 fi
-su - zimbra -c 'zmcontrol start'
+#su - zimbra -c 'zmcontrol start'
 
 # cron install certification
 a=`grep "/usr/bin/certbot" /var/spool/cron/root`

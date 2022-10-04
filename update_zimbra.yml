@@ -1,7 +1,6 @@
 ---
-- hosts: mail_server
+- hosts: all
   become: true
-  
   tasks:
   - name: check update
     shell: yum clean metadata

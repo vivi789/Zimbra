@@ -1,0 +1,43 @@
+---
+- hosts: mail_server
+  become: true
+  
+  tasks:
+  - name: check update
+    shell: yum clean metadata
+    shell: yum check-update || test $? -eq 100
+
+  - name: update
+    ansible.builtin.yum:
+      name:
+        - zimbra-common-core-jar
+        - zimbra-common-core-libs
+        - zimbra-mbox-store-libs
+      state: present
+      name: '*'
+      state: latest
+
+  - name: download script change logo
+    ansible.builtin.get_url:
+      url: https://gitlab.vinahost.vn/vint/zimbra/-/raw/main/change_logo.sh
+      dest: /root/change_logo.sh 
+      mode: '755'
+      force_basic_auth: yes
+
+  - name: run script
+    shell: /root/change_logo.sh
+
+  - name: reboot 
+    ansible.builtin.reboot:
+      
+  - name: check version and status zimbra
+    command: /opt/zimbra/bin/zmcontrol -v
+    command: /opt/zimbra/bin/zmcontrol status
+    become: true
+    become_user: zimbra
+    register: command_output
+
+  - debug:
+      var: command_output.stdout_lines
+
+
